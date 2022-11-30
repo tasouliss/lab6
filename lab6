@@ -1,0 +1,107 @@
+#include <stdio.h>
+
+/* Function to integrate. */
+double eval(double x);
+double area_of_trapezoid(double len1,double len2,double height);
+double a8roisma(double a, double b, int n);
+double function3(double a, double b, double diff, int n);
+
+
+int main (int argc, char *argv[]) {
+
+    double len1, len2, height, area,a,b,olokl;
+    int max_n;
+
+    printf("Interval:\n");
+    scanf(" %lf %lf",&a,&b);
+
+    printf("Max slices:\n");
+    scanf(" %d",&max_n);
+
+
+
+    /*scanf(" %lf %lf %lf ", &len1, &len2, &height);
+    area_of_trapezoid(len1,len2,height);
+   
+    area=area_of_trapezoid(len1,len2,height);
+    printf("area is %lf\n",area);
+
+    scanf(" %lf %lf %d ",&a,&b,&n);
+    olokl=a8roisma(a, b, n);
+    printf("%lf\n",olokl);*/
+
+return 0;
+}
+		
+
+/*sunarthsh gia ton upologismo embadou trapeziou*/
+
+double area_of_trapezoid (double len1, double len2, double height1){
+    double area1=0;
+    area1 = (len1+len2)*(height1/2);
+    return (area1);
+}
+
+/*sunarthsh gia ton upologismo a8roismatos */
+
+double a8roisma (double a, double b, int n)  {
+    double sum=0;
+    double ypsos,ypoemvado;
+    int i;
+    double prwto_akro=a,deutero_akro;
+    
+    ypsos=(b-a)/n;
+    deutero_akro=prwto_akro+ypsos;
+    /*ypoemvado=area_of_trapezoid(eval(prwto_akro),eval(prwto_akro+ypsos),ypsos);
+    sum+=ypoemvado;*/
+
+    /*for(i=1;i<ypsos;i++){
+        prwto_akro+=ypsos;
+        ypoemvado=area_of_trapezoid(eval(prwto_akro),eval(prwto_akro+ypsos),ypsos);
+        sum=sum+ypoemvado;
+    }*/
+
+    do { 
+        ypoemvado=area_of_trapezoid(eval(prwto_akro),eval(deutero_akro),ypsos);
+        sum=sum+ypoemvado;
+        prwto_akro=prwto_akro+ypsos;
+        deutero_akro=deutero_akro+ypsos;
+
+    } while(deutero_akro<=b);
+
+
+    return(sum);   
+}   
+
+/*sunarthsh gia */
+
+double function3(double a, double b, double diff, int max_n){
+    double oloklhrwma=0,oloklhrwma_a=0;diafora_oloklhrwmatwn=0;
+    int i,n=1;
+    
+    /*do {
+        oloklhrwma=a8roisma(a,b,n);
+        n++;
+        diff=ypsos-a;
+    } while((diff>0.01)&&(n<max_n));
+*/  
+    
+    for (i=1;i<=max_n;i++) {
+        oloklhrwma_a=a8roisma(a,b,n);
+
+        diafora_oloklhrwmatwn=fabs(oloklhrwma_a-oloklhrwma);
+        printf(" %2d: %6.2lf %6.2lf",n,oloklhrwma,diafora_oloklhrwmatwn);
+        n++;
+        oloklhrwma=oloklhrwma_a;
+        if (diafora_oloklhrwmatwn<0.01){
+            break;
+        }
+        if (n>max_n){
+            n=n-1;
+            break;
+        }
+
+        return(n);
+    }
+
+}
